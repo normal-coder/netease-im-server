@@ -64,6 +64,6 @@ class PublicController extends GlobalController {
 	public function logout()
 	{
 		session_destroy();
-		$this->success('注销成功，跳转回前台', U("Index/index"));
+		$this->success('注销成功，跳转回前台', U("User/index"));
 	}
 }
