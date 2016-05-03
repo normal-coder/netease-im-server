@@ -1,0 +1,45 @@
+<div class="am-modal am-modal-confirm" id="user-del">
+	<div class="am-modal-dialog">
+		<div class="am-modal-hd" id="user-del-title"></div>
+		<div class="am-modal-bd" id="user-del-content">
+			确定要删除用户吗？
+		</div>
+		<div class="am-modal-footer">
+			<span class="am-modal-btn" data-am-modal-cancel>取消</span>
+			<span class="am-modal-btn" data-am-modal-confirm>确定</span>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+		// 删除用户
+		function deluser (userid,username) {
+			$('#user-del-title').text('删除用户')
+			$('#user-del-content').text('确定删除用户 '+username+" ? (该操作不可撤销)");
+			$('#user-del').modal({
+				onConfirm: function() {
+					console.log('删除用户'+userid);
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						url: "{: U('delete') }",
+						data: {
+							id : userid  //用户ID
+						},
+						success: function(data){
+							console.log(data);
+							if (data.status==1) {
+								amalert("删除用户",data.info,"确定");
+								window.location.href=data.url;
+							}else{
+								amalert("删除用户",data.info,"确定");
+							};
+						}
+					});
+				},
+				onCancel: function() {
+					console.log('不弄了');
+				}
+			});
+		}
+</script>

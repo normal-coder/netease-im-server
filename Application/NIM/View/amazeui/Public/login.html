@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Login Page | Amaze UI Example</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="alternate icon" type="image/png" href="__IMG__/favicon.png">
+	<link rel="stylesheet" href="__CSS__/amazeui.min.css"/>
+	<style>
+		.header {text-align: center; }
+		.header h1 {font-size: 200%; }
+		.header p {font-size: 14px; }
+	</style>
+</head>
+<body>
+<div class="header">
+<br>
+<br>
+<br>
+<br>
+
+	<div class="am-g">
+		<h1>网易云信</h1>
+		<p>IM用户管理系统</p>
+	</div>
+</div>
+<div class="am-g">
+	<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+		<hr>
+
+		<form method="post" class="am-form" action="{: U('login') }">
+			<label for="username">邮箱:</label>
+			<input type="text" name="username" id="username" value="" />
+			<br>
+			<label for="password">密码:</label>
+			<input type="password" name="password" id="password" value="" />
+			<br>
+			<div class="am-cf">
+				<input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm">
+			</div>
+		</form>
+		<hr>
+
+		<p>友情链接:
+		<span><a href="http://yuantuan.com/"> 猿团 </a></span>
+		<span><a href="http://edu.yuantuan.com/"> 猿团教育 </a></span>
+		<span><a href="http://netease.im/"> 网易云信 </a></span>
+		<span><a href="http://thinkphp.cn/"> ThinkPHP </a></span>
+		<span><a href="http://amazeui.org/"> AmazeUI </a></span>
+
+		</p>
+		<p>&copy;1997 - 2016 网易云信IM 归属 网易公司版权所有　项目开源地址:<a href="https://github.com/normal1017/netease-im-thinkphp">点击访问</a></p>
+		<p>关于作者:
+		<span><a href="http://weibo.com/normal1017">　新浪微博:@诺墨-</a></span>
+		<span><a href="http://normalcoder.com/">　Blog:诺墨的博客</a></span>
+		<span><a href="http://weibo.com/normal1017">　微信:normal1017</a></span></p>
+
+	</div>
+</div>
+</body>
+</html>

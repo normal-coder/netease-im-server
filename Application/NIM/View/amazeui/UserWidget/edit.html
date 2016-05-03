@@ -1,0 +1,129 @@
+<div class="am-popup" id="user-edit">
+
+				<div class="am-popup-inner">
+					<div class="am-popup-hd">
+						<h4 class="am-popup-title" id="user-edit-title"></h4>
+						<span data-am-modal-close="" class="am-close">×</span>
+					</div>
+					<div class="am-popup-bd">
+						<form class="am-form am-form-horizontal">
+							<div class="am-form-group">
+								<input type="hidden" id="user-edit-id" name="id" value="">
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-name" class="am-u-sm-3 am-form-label">昵称:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-name" name="name" placeholder="输入昵称"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-icon" class="am-u-sm-3 am-form-label">头像:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-icon" name="icon" placeholder="输入头像"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-sign" class="am-u-sm-3 am-form-label">签名:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-sign" name="sign" placeholder="输入签名"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-email" class="am-u-sm-3 am-form-label">邮箱:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-email" name="email" placeholder="输入邮箱"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-birthday" class="am-u-sm-3 am-form-label">生日:</label>
+								<div class="am-u-sm-9"><input type="date" id="user-edit-birthday" name="birthday" placeholder="输入生日"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-mobile" class="am-u-sm-3 am-form-label">手机号码:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-mobile" name="mobile" placeholder="输入手机号码"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-0表示未知，1表示男，2表示女" class="am-u-sm-3 am-form-label">性别:</label>
+								<div class="am-u-sm-9">
+									<select name="gender" id="user-edit-name">
+										<option value="1">男</option>
+										<option value="2">女</option>
+										<option value="0">保密</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-qq" class="am-u-sm-3 am-form-label">QQ号码:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-qq" name="qq" placeholder="输入QQ号码"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-weibo" class="am-u-sm-3 am-form-label">新浪微博:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-weibo" name="weibo" placeholder="输入新浪微博"></div>
+							</div>
+
+							<div class="am-form-group">
+								<label for="user-edit-intro" class="am-u-sm-3 am-form-label">个人简介:</label>
+								<div class="am-u-sm-9"><input type="text" id="user-edit-intro" name="intro" placeholder="输入个人简介"></div>
+							</div>
+
+							<div class="am-form-group">
+								<div class="am-u-sm-9 am-u-sm-push-3">
+									<button type="button" class="am-btn am-btn-primary" onclick="javascript:useredit();">保存修改</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+
+<script type="text/javascript">
+	function edituser (id,name,icon,sign,email,birthday,mobile,name,qq,weibo,intro) {
+		$('#user-edit-id').val(id) ;              //用户ID
+		$('#user-edit-name').val(name) ;          //昵称
+		$('#user-edit-icon').val(icon) ;          //头像
+		$('#user-edit-sign').val(sign) ;          //签名
+		$('#user-edit-email').val(email) ;        //邮箱
+		$('#user-edit-birthday').val(birthday) ;  //生日
+		$('#user-edit-mobile').val(mobile) ;      //手机号码
+		$('#user-edit-name').val(name) ;          //性别
+		$('#user-edit-qq').val(qq) ;              //QQ号码
+		$('#user-edit-weibo').val(weibo) ;        //新浪微博
+		$('#user-edit-intro').val(intro) ;        //个人简介
+		$('#user-edit-title').text("用户资料编辑 - " + $('#user-edit-name').val());
+		$('#user-edit').modal({});
+	}
+	function useredit () {
+		// 资料获取
+		$.ajax({
+			type: "post",
+			url: "{: U('edit') }",
+			data: {
+				id       : $('#user-edit-id').val(),        //用户ID
+				name     : $('#user-edit-name').val(),      //昵称
+				icon     : $('#user-edit-icon').val(),      //头像
+				sign     : $('#user-edit-sign').val(),      //签名
+				email    : $('#user-edit-email').val(),     //邮箱
+				birthday : $('#user-edit-birthday').val(),  //生日
+				mobile   : $('#user-edit-mobile').val(),    //手机号码
+				name     : $('#user-edit-name').val(),      //性别
+				qq       : $('#user-edit-qq').val(),        //QQ号码
+				weibo    : $('#user-edit-weibo').val(),     //新浪微博
+				intro    : $('#user-edit-intro').val(),     //个人简介
+			},
+			dataType: "json",
+			success: function(data){
+				console.log(data);
+				if (data.status==1) {
+					amalert("编辑用户",data.info,"确定");
+					window.location.href=data.url;
+				}else{
+					amalert("编辑用户",data.info,"确定");
+				};
+			}
+		});
+	}
+
+</script>

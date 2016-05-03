@@ -1,0 +1,103 @@
+<extend name="Public:common" />
+<block name="container">
+	<div class="am-g">
+		<div class="am-u-sm-12 am-u-md-6">
+			<div class="am-btn-toolbar">
+				<div class="am-btn-group am-btn-group-xs">
+					<button type="button" class="am-btn am-btn-default" data-am-modal="{target: '#user-add'}">
+						<span class="am-icon-plus"></span> 新增
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="am-g">
+		<div class="am-u-sm-12">
+			<form class="am-form">
+				<table class="am-table am-table-striped am-table-hover table-main">
+					<thead>
+					<tr>
+						<th class="table-check"><!-- <input type="checkbox" /> -->　</th>
+						<th class="table-title">用户</th>
+						<th class="table-title">昵称</th>
+						<th class="table-set">性别</th>
+						<th class="table-author am-hide-sm-only">生日</th>
+						<th class="table-date am-hide-sm-only">手机号码</th>
+						<th class="table-type">邮箱</th>
+						<th class="table-author am-hide-sm-only">账号状态</th>
+						<th class="table-author am-hide-sm-only">IM功能</th>
+						<th class="table-set">用户操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<volist name="userlist" id="vo" >
+					<tr>
+						<td><input type="checkbox" /></td>
+						<!-- {: $vo['id'] } -->
+						<td>
+							<img src="__IMG__/favicon.png" style="height: 15px">
+							{: $vo['icon'] }{: $vo['username'] }
+						</td>
+						<td>{: $vo['name'] }</td>
+						<td>{: $vo['gender'] }</td>
+						<td>{: $vo['birthday'] }</td>
+						<td>{: $vo['mobile'] }</td>
+						<td>{: $vo['email'] }</td>
+						<td>{: getUserStauts($vo['id'],$vo['status'],$vo['username']) }</td>
+						<td>{: getIMStauts($vo['id'],$vo['imstatus'],$vo['username']) }</td>
+						<td>
+							<div class="am-btn-toolbar">
+								<div class="am-btn-group am-btn-group-sm">
+									<button type="button" class="am-btn am-btn-default" onclick="javascript:edituser('{:$vo['id']}','{:$vo['name']}','{:$vo['icon']}','{:$vo['sign']}','{:$vo['email']}','{:$vo['birthday']}','{:$vo['mobile']}','{:$vo['name']}','{:$vo['qq']}','{:$vo['weibo']}','{:$vo['intro']}');" >
+										<span class="am-icon-pencil-square-o"></span> 编辑
+									</button>
+									
+									
+									<div class="am-dropdown" data-am-dropdown>
+										<button class="am-btn am-btn-default am-btn-sm am-dropdown-toggle" data-am-dropdown-toggle>
+											<span class="am-icon-caret-down"></span> 更多
+										</button>
+											<ul class="am-dropdown-content">
+
+											<li class="am-dropdown-header">重置选项</li>
+											<li class="am-divider"></li>
+											<li><a href="javascript:resetpassword('{:$vo['id']}','{:$vo['username']}')"><span class="am-icon-key"> 重置密码</span></a></li>
+											<li><a href="javascript:reset_token('{:$vo['id']}','{:$vo['username']}')"><span class="am-icon-key"> 刷新云信授权</a></span></li>
+
+											<!-- <li class="am-dropdown-header">账号开关</li>
+											<li class="am-divider"></li>
+											<li><a href=""><span class="am-icon-lock"> 启用/禁用用户</span></a></li>
+											<li><a href=""><span class="am-icon-unlock"> 启用/禁用云信功能</span></a></li> -->
+
+											<li class="am-dropdown-header">账号删除</li>
+											<li class="am-divider"></li>
+											<li><a href="javascript:deluser('{:$vo['id']}','{:$vo['name']}');"><span class="am-icon-trash-o am-text-danger"> 删除用户</span></a></li>
+									
+										</ul>
+									</div>
+											
+											
+
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					</volist>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+	{:W('User/add')}
+	{:W('User/edit')}
+	{:W('User/del')}
+	{:W('User/status')}
+	{:W('User/status_im')}
+	{:W('User/password')}
+	{:W('User/token')}
+	{:W('Public/amalert')}
+</block>
+

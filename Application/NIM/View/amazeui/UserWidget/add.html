@@ -1,0 +1,134 @@
+<div class="am-popup" id="user-add">
+	<div class="am-popup-inner">
+		<div class="am-popup-hd">
+			<h4 class="am-popup-title">新建用户</h4>
+			<span data-am-modal-close="" class="am-close">×</span>
+		</div>
+		<div class="am-popup-bd">
+		
+			<form class="am-form am-form-horizontal" action="{: U('add') }" method="post">
+				<div class="am-form-group">
+					<label for="user-add-username" class="am-u-sm-3 am-form-label">帐号</label>
+					<div class="am-u-sm-9">
+						<input type="text" id="user-add-username" name="username" placeholder="请输入帐号">
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-password" class="am-u-sm-3 am-form-label">密码</label>
+					<div class="am-u-sm-9">
+						<input type="text" id="user-add-password" name="password" placeholder="请输入密码">
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-name" class="am-u-sm-3 am-form-label">昵称</label>
+					<div class="am-u-sm-9">
+						<input type="text" id="user-add-name" name="name" placeholder="请输入昵称">
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-gender" class="am-u-sm-3 am-form-label">性别</label>
+					<div class="am-u-sm-9">
+						<select name="gender" id="user-add-gender">
+							<option value="1">男</option>
+							<option value="2">女</option>
+							<option value="0">保密</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="am-form-group">
+					<label for="user-add-sign" class="am-u-sm-3 am-form-label">签名</label>
+					<div class="am-u-sm-9">
+						<input type="text" id="user-add-sign" name="sign" placeholder="请输入签名">
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-email" class="am-u-sm-3 am-form-label">电子邮件</label>
+					<div class="am-u-sm-9">
+						<input type="email" id="user-add-email" name="email" placeholder="输入你的电子邮件">
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-birthday" class="am-u-sm-3 am-form-label">生日</label>
+					<div class="am-u-sm-9">
+						<input type="date" id="user-add-birthday" name="birthday" placeholder="请输入生日">				
+					</div>
+				</div>
+				<div class="am-form-group">
+					<label for="user-add-mobile" class="am-u-sm-3 am-form-label">电话</label>
+					<div class="am-u-sm-9">
+						<input type="tel" id="user-add-mobile" name="mobile" placeholder="输入你的电话号码">				
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-qq" class="am-u-sm-3 am-form-label">QQ</label>
+					<div class="am-u-sm-9">
+						<input type="number" pattern="[0-9]*" id="user-add-qq" name="qq" placeholder="输入你的QQ号码">
+					</div>
+				</div>
+
+
+				<div class="am-form-group">
+					<label for="user-add-weibo" class="am-u-sm-3 am-form-label">微博</label>
+					<div class="am-u-sm-9">
+						<input type="text" id="user-add-weibo" name="weibo" placeholder="输入你的微博">
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<label for="user-add-intro" class="am-u-sm-3 am-form-label">简介</label>
+					<div class="am-u-sm-9">
+						<textarea class="" rows="5" id="user-add-intro" name="intro" placeholder="输入个人简介"></textarea>
+					</div>
+				</div>
+
+				<div class="am-form-group">
+					<div class="am-u-sm-9 am-u-sm-push-3">
+						<button type="button" class="am-btn am-btn-primary" onclick="javascript:adduser();">新建用户</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	// 创建用户
+	function adduser(){
+		$.ajax({
+			type: "post",
+			url: "{: U('add') }",
+			data: {
+				username: $("#user-add-username").val(),
+				password: $("#user-add-password").val(),
+				name:     $("#user-add-name").val(),
+				sign:     $("#user-add-sign").val(),
+				gender:   $("#user-add-gender").val(),
+				email:    $("#user-add-email").val(),
+				birthday: $("#user-add-birthday").val(),
+				mobile:   $("#user-add-mobile").val(),
+				qq:       $("#user-add-qq").val(),
+				weibo:    $("#user-add-weibo").val(),
+				intro:    $("#user-add-intro").val(),
+			},
+			dataType: "json",
+			success: function(data){
+				if (data.status==1) {
+					// amalert("新建用户",data.info,"确定");
+					window.location.href=data.url;
+				}else{
+					amalert("新建用户",data.info,"确定");
+				};
+			}
+		});
+	}
+</script>
+

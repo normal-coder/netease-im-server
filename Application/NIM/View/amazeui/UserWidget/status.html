@@ -1,0 +1,26 @@
+<script type="text/javascript">
+	// 删除用户
+	function userstatus (userid,username) {
+		console.log('启用/禁用用户'+userid);
+		$.ajax({
+			type: "post",
+			dataType: "json",
+			url: "{: U('status') }",
+			data: {
+				id : userid  //用户ID
+			},
+			success: function(data){
+				console.log(data);
+				if (data.status==1) {
+					amalert("",data.info,"确定");
+				}else{
+					amalert("",data.info,"确定");
+				};
+			},
+			error: function(data) {
+				console.log(data);
+			},
+		});
+		
+	}
+</script>
